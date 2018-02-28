@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     ROS_INFO("usage: add_two_ints_client X Y");
     return 1;
   }
-
+source devel/setup.bash
   ros::NodeHandle n;
   ros::ServiceClient client = n.serviceClient<beginner_tutorials::AddTwoInts>("add_two_ints");
   beginner_tutorials::AddTwoInts srv;
@@ -27,4 +27,4 @@ int main(int argc, char **argv)
   }
 
   return 0;
-}
+  }
