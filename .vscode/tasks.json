@@ -101,7 +101,8 @@
 						}
 					]
 				}
-			]
+			],
+			"isBuildCommand": true
 		},
 		{
 			"taskName": "Release",
@@ -291,8 +292,7 @@
 						}
 					]
 				}
-			],
-			"isBuildCommand": true
+			]
 		},
 		{
 			"taskName": "Release (isolated)",
