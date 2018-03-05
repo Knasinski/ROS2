@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(beginner_tutorials)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg nav_msgs)
 
 ## Declare ROS messages and services
 add_message_files(FILES Num.msg)
@@ -12,7 +12,7 @@ add_service_files(FILES AddTwoInts.srv)
 generate_messages(DEPENDENCIES std_msgs)
 
 ## Declare a catkin package
-catkin_package()
+catkin_package(CATKIN_DEPENDS nav_msgs roscpp rospy)
 
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
@@ -26,9 +26,14 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener beginner_tutorials_generate_messages_cpp)
 
 add_executable(add_two_ints_server src/add_two_ints_server.cpp)
-target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_server beginner_tutorials_gencpp)
+target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+
+add_executable(turtlebot_listener src/turtlebot_listener.cpp)
+##add_dependencies(turtlebot_listener ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(turtlebot_listener beginner_tutorials_gencpp)
+target_link_libraries(turtlebot_listener ${catkin_LIBRARIES})
 
 add_executable(add_two_ints_client src/add_two_ints_client.cpp)
-target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
+target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
